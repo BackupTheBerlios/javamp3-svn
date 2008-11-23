@@ -49,6 +49,11 @@ import java.io.IOException;
 public class MP3File extends java.io.File {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
      * Creates a new instance. Tag information is completely read the first time
      * it is requested and written after <code>update()</code>.
      * 
@@ -1417,7 +1422,6 @@ public class MP3File extends java.io.File {
         // write v1
 
         // parse track
-        boolean found = false;
         int slashpos = track.getTextContent().indexOf('/');
         String trackstring;
         if (slashpos != -1) {
@@ -3001,6 +3005,7 @@ public class MP3File extends java.io.File {
      * @return true if the array is numeric
      */
     protected boolean checkNumeric(String in) {
+    	// TODO: this is really dirty, there must be some better way
         try {
             Integer test = new Integer(in);
             return true;

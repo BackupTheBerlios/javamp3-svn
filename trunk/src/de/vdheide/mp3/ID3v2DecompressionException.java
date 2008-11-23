@@ -26,4 +26,9 @@ package de.vdheide.mp3;
  * Thrown when decompression of an ID3v2Frame failed.
  */
 public class ID3v2DecompressionException extends ID3v2Exception {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 }

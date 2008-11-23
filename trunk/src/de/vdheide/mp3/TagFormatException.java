@@ -27,4 +27,9 @@ package de.vdheide.mp3;
  * definition.
  */
 public class TagFormatException extends Exception {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 }

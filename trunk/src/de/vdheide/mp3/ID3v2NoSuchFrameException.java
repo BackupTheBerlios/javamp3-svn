@@ -26,4 +26,9 @@ package de.vdheide.mp3;
  * Raised when an ID3v2 tag does not contain a requested frame
  */
 public class ID3v2NoSuchFrameException extends ID3v2Exception {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 }

@@ -27,4 +27,9 @@ package de.vdheide.mp3;
  * MP3 frame.
  */
 public class NoMP3FrameException extends Exception {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 }

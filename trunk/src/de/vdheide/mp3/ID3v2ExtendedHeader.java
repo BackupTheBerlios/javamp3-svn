@@ -75,10 +75,6 @@ public class ID3v2ExtendedHeader {
         byte[] head = new byte[10];
         in.read(head);
 
-        // decode size
-        int size = (int) (new de.vdheide.utils.Bytes(head, 0, 4)
-                .getValue());
-
         // decode extended flags
         if (((head[4] & 0xff) & FLAG_CRC_PRESENT) > 0) {
             crc_present = true;

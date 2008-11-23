@@ -28,6 +28,11 @@ package de.vdheide.mp3;
 public class NoID3TagException extends ID3Exception {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
      * Create a new exception
      */
     public NoID3TagException() {

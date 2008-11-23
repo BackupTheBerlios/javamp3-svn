@@ -27,4 +27,9 @@ package de.vdheide.mp3;
  * mismatch.
  */
 public class ID3v2WrongCRCException extends ID3v2Exception {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 }

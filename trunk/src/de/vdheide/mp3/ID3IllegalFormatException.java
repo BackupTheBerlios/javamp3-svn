@@ -26,4 +26,9 @@ package de.vdheide.mp3;
  * Thrown if an illegal format in an ID3 tag is detected.
  */
 public class ID3IllegalFormatException extends ID3Exception {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 }

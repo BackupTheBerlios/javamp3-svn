@@ -26,4 +26,9 @@ package de.vdheide.mp3;
  * Thrown when a frame is damaged (e.g. too short)
  */
 public class FrameDamagedException extends Exception {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 }

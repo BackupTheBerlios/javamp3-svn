@@ -1,3 +1,9 @@
+Version 0.4 (working)
+
+FIX: Changed Eclipse project settings to use the JUnit library instead of JUNIT_HOME
+MOD: Various internal modifications (removing of unused private members, imports etc.)
+MOD: Added serialVersionUID to all exception classes
+
 Version 0.3
 
 FIX: When updating an ID3v2 tag in an MP3 file which already contained an ID3v2

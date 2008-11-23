@@ -89,16 +89,13 @@ public class ID3v2Frame {
 
         if (compression_type == DO_COMPRESS) {
             // compress content
-            decompressed_length = this.content.length;
             compressContent();
         } else if (compression_type == IS_COMPRESSED) {
             // decompress content
             compressed_content = content;
             decompressContent();
-            decompressed_length = this.content.length;
         } else {
             // no compression
-            decompressed_length = this.content.length;
             compressed_content = this.content;
         }
     }
@@ -171,8 +168,6 @@ public class ID3v2Frame {
             // read decompressed size
             byte[] decomp_byte = new byte[4];
             in.read(decomp_byte);
-            decompressed_length = (int) (new de.vdheide.utils.Bytes(
-                    decomp_byte)).getValue();
 
             // substract 4 bytes from length to get actual content length
             length -= 4;
@@ -561,13 +556,9 @@ public class ID3v2Frame {
 
     private byte encryption_id = 0;
 
-    private int decompressed_length = 0;
-
     private boolean compression = false;
 
     private byte group = 0;
-
-    private boolean uses_unsynch = false;
 
     private byte[] content; // decompressed
 

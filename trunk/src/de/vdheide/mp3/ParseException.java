@@ -26,4 +26,9 @@ package de.vdheide.mp3;
  * Thrown when an error in Parser occurs
  */
 public class ParseException extends Exception {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 }

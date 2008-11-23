@@ -58,7 +58,6 @@ class Parser {
      */
     public Parser(byte[] in, boolean encoding, int start, int stop) {
         this.in = in;
-        this.start = start;
         this.pos = start;
         this.stop = stop;
 
@@ -191,8 +190,6 @@ class Parser {
     }
 
     private byte[] in;
-
-    private int start;
 
     private int stop;
 
