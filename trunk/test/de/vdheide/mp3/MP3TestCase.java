@@ -82,7 +82,6 @@ public abstract class MP3TestCase extends TestCase {
             fail("Length differs, expected " + expect.length + ", got "
                     + val.length);
         }
-        boolean equal = true;
         for (int i = 0; i < expect.length; i++) {
             if (expect[i] != val[i]) {
                 fail("Arrays differ at index " + i + ", expected "

@@ -3,6 +3,8 @@ Version 0.4 (working)
 FIX: Changed Eclipse project settings to use the JUnit library instead of JUNIT_HOME
 MOD: Various internal modifications (removing of unused private members, imports etc.)
 MOD: Added serialVersionUID to all exception classes
+MOD: MP3TestCase: delete mp3 files created in setUp in tearDown
+FIX: Parser.parseText(int) destroyed last char in a little-endian UTF-16 string
 
 Version 0.3
 
