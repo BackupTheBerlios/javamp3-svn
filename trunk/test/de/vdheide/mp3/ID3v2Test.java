@@ -245,6 +245,33 @@ public class ID3v2Test extends MP3TestCase {
 
     }
 
+    /**
+     * Tests that a custom frame (i.e. a frame starting with X) is added
+     * correctly. This test also writes the file and re-reads it.
+     */
+    public void testAddCustomFrame() throws Exception {
+        ID3v2 id3v2 = new ID3v2((File) testFiles.get("short_none"));
+
+        ID3v2Frame frame = new ID3v2Frame("XZZZ", "\0Custom"
+                .getBytes("Cp437"), false, false, false,
+                ID3v2Frame.NO_COMPRESSION, (byte) 0, (byte) 0);
+        id3v2.addFrame(frame);
+
+        Vector res = id3v2.getFrame("XZZZ");
+        Vector expect = new Vector();
+        expect.add(frame);
+        assertEquals(expect, res);
+        
+        id3v2.update();
+        
+        ID3v2 reread = new ID3v2((File) testFiles.get("short_none"));
+
+        res = reread.getFrame("XZZZ");
+        expect = new Vector();
+        expect.add(frame);
+        assertEquals(expect, res);
+    }
+
     /*
      * Class under test for void removeFrame(ID3v2Frame)
      */
