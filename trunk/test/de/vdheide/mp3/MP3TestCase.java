@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Enumeration;
 import java.util.Hashtable;
 
 import junit.framework.TestCase;
@@ -67,10 +68,10 @@ public abstract class MP3TestCase extends TestCase {
      * Remove all test files contained in testFiles.
      */
     protected void tearDown() throws Exception {
-/*        for (Enumeration e = testFiles.elements(); e.hasMoreElements();) {
+        for (Enumeration e = testFiles.elements(); e.hasMoreElements();) {
             File file = (File) e.nextElement();
             file.delete();
-        }*/
+        }
     }
 
     /**

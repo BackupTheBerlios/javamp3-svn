@@ -3007,7 +3007,7 @@ public class MP3File extends java.io.File {
     protected boolean checkNumeric(String in) {
     	// TODO: this is really dirty, there must be some better way
         try {
-            Integer test = new Integer(in);
+            new Integer(in);
             return true;
         } catch (NumberFormatException e) {
             return false;
