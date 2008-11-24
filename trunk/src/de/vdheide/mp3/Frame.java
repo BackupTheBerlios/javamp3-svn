@@ -26,24 +26,19 @@ package de.vdheide.mp3;
  * A wrapper for the ID3v2Frame class. Can only build a frame and set it.
  */
 class Frame {
-    /**
-     * Constructor.
-     * 
-     * @param id3v2
-     *            ID3v2 tag to add frame to. Must already be connected to file.
-     * @param type
-     *            ID3v2 frame type
-     * @param content
-     *            Content as byte array
-     * @param tag_preservation
-     *            If true, set flag so that frame is removed if unknown to
-     *            programs and tag is changed
-     * @param file_preservation
-     *            Same as <code>tag_preservation</code> but frame is removed
-     *            if file is changed.
-     * @param use_compression
-     *            Should frame be compressed?
-     */
+	/**
+	 * Constructor.
+	 * 
+	 * @param id3v2 ID3v2 tag to add frame to. Must already be connected to
+	 *            file.
+	 * @param type ID3v2 frame type
+	 * @param content Content as byte array
+	 * @param tag_preservation If true, set flag so that frame is removed if
+	 *            unknown to programs and tag is changed
+	 * @param file_preservation Same as <code>tag_preservation</code> but frame
+	 *            is removed if file is changed.
+	 * @param use_compression Should frame be compressed?
+	 */
     public Frame(ID3v2 id3v2, String type, byte[] content,
             boolean tag_preservation, boolean file_preservation,
             boolean use_compression) {
@@ -74,16 +69,14 @@ class Frame {
         id3v2.addFrame(frame);
     }
 
-    /**
-     * Read the first frame of the given type from an ID3v2 tag and return its
-     * bytes.
-     * 
-     * @param id3v2
-     *            The ID3v2 frame to read from
-     * @param type
-     *            The ID of the frame to read
-     * @return the frame as a byte array
-     */
+	/**
+	 * Read the first frame of the given type from an ID3v2 tag and return its
+	 * bytes.
+	 * 
+	 * @param id3v2 The ID3v2 frame to read from
+	 * @param type The ID of the frame to read
+	 * @return the frame as a byte array
+	 */
     public static byte[] read(ID3v2 id3v2, String type) {
         try {
             return ((ID3v2Frame) (id3v2.getFrame(type).elementAt(0)))

@@ -26,18 +26,14 @@ package de.vdheide.mp3;
  * Used for binary frames (a frame with only a <binary data>).
  */
 class BinaryFrame {
-    /**
-     * Create a new binary frame.
-     * 
-     * @param id3v2
-     *            ID3v2 tag that this frame is added to
-     * @param type
-     *            ID of frame
-     * @param content
-     *            Contents of frame
-     * @param use_compression
-     *            Whether to compress this frame
-     */
+	/**
+	 * Create a new binary frame.
+	 * 
+	 * @param id3v2 ID3v2 tag that this frame is added to
+	 * @param type ID of frame
+	 * @param content Contents of frame
+	 * @param use_compression Whether to compress this frame
+	 */
     public BinaryFrame(ID3v2 id3v2, String type, TagContent content,
             boolean use_compression) {
         this.id3v2 = id3v2;
@@ -71,16 +67,14 @@ class BinaryFrame {
         id3v2.addFrame(frame);
     }
 
-    /**
-     * Read content from ID3v2 tag.
-     * 
-     * @param id3v2
-     *            ID3v2 tag to read frame from
-     * @param type
-     *            ID of frame to read
-     * @return Content of frame
-     * @throws FrameDamagedException
-     */
+	/**
+	 * Read content from ID3v2 tag.
+	 * 
+	 * @param id3v2 ID3v2 tag to read frame from
+	 * @param type ID of frame to read
+	 * @return Content of frame
+	 * @throws FrameDamagedException if the frame is damaged
+	 */
     public static TagContent read(ID3v2 id3v2, String type)
             throws FrameDamagedException {
         TagContent ret = new TagContent();

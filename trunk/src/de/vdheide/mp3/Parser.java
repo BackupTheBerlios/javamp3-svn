@@ -33,11 +33,9 @@ class Parser {
 	/**
 	 * Create new instance, use complete array
 	 * 
-	 * @param in
-	 *            Array to parse
-	 * @param encoding
-	 *            True: First byte of input contains encoding. False: Encoding
-	 *            is set to ISO-8859-1
+	 * @param in Array to parse
+	 * @param encoding True: First byte of input contains encoding. False:
+	 *            Encoding is set to ISO-8859-1
 	 */
 	public Parser(byte[] in, boolean encoding) {
 		this(in, encoding, 0, in.length - 1);
@@ -46,15 +44,11 @@ class Parser {
 	/**
 	 * Create new instance, use part of array
 	 * 
-	 * @param in
-	 *            Array to parse
-	 * @param encoding
-	 *            True: First byte of input contains encoding. False: Encoding
-	 *            is set to ISO-8859-1
-	 * @param start
-	 *            Offset of first byte to parse
-	 * @param stop
-	 *            Offset of last byte to parse
+	 * @param in Array to parse
+	 * @param encoding True: First byte of input contains encoding. False:
+	 *            Encoding is set to ISO-8859-1
+	 * @param start Offset of first byte to parse
+	 * @param stop Offset of last byte to parse
 	 */
 	public Parser(byte[] in, boolean encoding, int start, int stop) {
 		this.in = in;
@@ -71,8 +65,7 @@ class Parser {
 	/**
 	 * Set byte position
 	 * 
-	 * @param pos
-	 *            New byte position
+	 * @param pos New byte position
 	 */
 	public void setPosition(int pos) {
 		this.pos = pos;
@@ -93,7 +86,7 @@ class Parser {
 		encoding = in[pos];
 		pos++;
 	}
-	
+
 	/**
 	 * Returns the encoding that is used for the input array.
 	 * 
@@ -107,7 +100,7 @@ class Parser {
 	 * Parse next bytes as text according to set encoding
 	 * 
 	 * @return Parsed text
-	 * @throws ParseException
+	 * @throws ParseException if the bytes are invalid and cannot be parsed
 	 */
 	public String parseText() throws ParseException {
 		return parseText(this.encoding);
@@ -116,10 +109,9 @@ class Parser {
 	/**
 	 * Parse next bytes as text according to given encoding
 	 * 
-	 * @param encoding
-	 *            Encoding to use
+	 * @param encoding Encoding to use
 	 * @return Parsed text
-	 * @throws ParseException
+	 * @throws ParseException if the bytes are invalid and cannot be parsed
 	 */
 	public String parseText(byte encoding) throws ParseException {
 		try {
@@ -167,7 +159,7 @@ class Parser {
 	 * Read next bytes to end (no real parsing, just copying)
 	 * 
 	 * @return Parsed binary data
-	 * @throws ParseException
+	 * @throws ParseException if the bytes are invalid and cannot be parsed
 	 */
 	public byte[] parseBinary() throws ParseException {
 		return parseBinary(stop - pos + 1);
@@ -176,10 +168,9 @@ class Parser {
 	/**
 	 * Read next <code>number</code> bytes (no real parsing, just copying)
 	 * 
-	 * @param number
-	 *            Number of bytes to read
+	 * @param number Number of bytes to read
 	 * @return Parsed binary data
-	 * @throws ParseException
+	 * @throws ParseException if the bytes are invalid and cannot be parsed
 	 */
 	public byte[] parseBinary(int number) throws ParseException {
 		try {

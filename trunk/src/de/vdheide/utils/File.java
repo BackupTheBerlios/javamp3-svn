@@ -31,15 +31,13 @@ public class File {
     private File() {
     }
 
-    /**
-     * Copy from <tt>source</tt> to <tt>destination</tt>
-     * 
-     * @param source
-     *            Source file
-     * @param dest
-     *            Destination file (no directory!)
-     * @throws java.io.IOException
-     */
+	/**
+	 * Copy from <tt>source</tt> to <tt>destination</tt>
+	 * 
+	 * @param source Source file
+	 * @param dest Destination file (no directory!)
+	 * @throws java.io.IOException if the file cannot be copied
+	 */
     public static void copy(String source, String dest)
             throws java.io.IOException {
         java.io.FileInputStream in = null;
@@ -71,32 +69,30 @@ public class File {
         }
     }
 
-    /**
-     * Create a uniquely named temporary file in the form XXXnnnnn.tmp.
-     * 
-     * @param id
-     *            a string prepended on the file generated. Should you fail to
-     *            delete it later, the id will help identify where it came from.
-     *            null and "" also allowed.
-     * 
-     * @param near
-     *            Directory to create file in. Can also be a file, then
-     *            temporary file is created in same directory.
-     *            <p>
-     *            If null, one of these locations is used (sorted by
-     *            preference):
-     *            <ol>
-     *            <li>/tmp</li>
-     *            <li>/var/tmp
-     *            <li>c:/temp</li>
-     *            <li>c:/windows/temp</li>
-     *            <li>/</li>
-     *            <li>current directory</li>
-     *            </ol>
-     * 
-     * @return a temporary File with a unique name in the form XXXnnnnn.tmp.
-     * @throws java.io.IOException
-     */
+	/**
+	 * Create a uniquely named temporary file in the form XXXnnnnn.tmp.
+	 * 
+	 * @param id a string prepended on the file generated. Should you fail to
+	 *            delete it later, the id will help identify where it came from.
+	 *            null and "" also allowed.
+	 * 
+	 * @param near Directory to create file in. Can also be a file, then
+	 *            temporary file is created in same directory.
+	 *            <p>
+	 *            If null, one of these locations is used (sorted by
+	 *            preference):
+	 *            <ol>
+	 *            <li>/tmp</li>
+	 *            <li>/var/tmp
+	 *            <li>c:/temp</li>
+	 *            <li>c:/windows/temp</li>
+	 *            <li>/</li>
+	 *            <li>current directory</li>
+	 *            </ol>
+	 * 
+	 * @return a temporary File with a unique name in the form XXXnnnnn.tmp.
+	 * @throws java.io.IOException if the temporary file cannot be created
+	 */
     public static java.io.File getTempFile(String id, java.io.File near)
             throws java.io.IOException {
         String prepend = (id != null) ? id : "";
