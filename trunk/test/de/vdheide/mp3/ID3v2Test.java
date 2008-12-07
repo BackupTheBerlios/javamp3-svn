@@ -3,7 +3,6 @@ package de.vdheide.mp3;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Vector;
@@ -80,15 +79,17 @@ public class ID3v2Test extends MP3TestCase {
 
 	protected Hashtable expectFrames;
 
-	/*
-	 * Class under test for void ID3v2(InputStream)
+	/**
+	 * Tests using the class with an InputStream.
+	 * 
+	 * @exception Exception if an exception occurred
 	 */
 	public void testID3v2InputStream() throws Exception {
 		FileInputStream fis = new FileInputStream((File) testFiles
 				.get("short_v2reg"));
 		ID3v2 id3v2 = new ID3v2(fis);
 		fis.close();
-		
+
 		// try to read a frame => should succeed
 		Vector res = id3v2.getFrame("TIT2");
 		Vector expect = new Vector();
@@ -111,6 +112,9 @@ public class ID3v2Test extends MP3TestCase {
 	// No need to test ID3v2(File) as it is used in almost all
 	// other tests
 
+	/**
+	 * Tests the synchronize method.
+	 */
 	public void testSynchronize() {
 		// no sync
 		byte[] test = { (byte) 10, (byte) 255, (byte) 30, (byte) 10, (byte) 12,
@@ -127,6 +131,9 @@ public class ID3v2Test extends MP3TestCase {
 		assertEqualsByteArray(expect2, res);
 	}
 
+	/**
+	 * Tests the unsynchronize method.
+	 */
 	public void testUnynchronize() {
 		// array does not contain any 0xff
 		byte[] test = { (byte) 10, (byte) 240, (byte) 30, (byte) 10, (byte) 12,
@@ -167,6 +174,11 @@ public class ID3v2Test extends MP3TestCase {
 		assertEqualsByteArray(expect5, res);
 	}
 
+	/**
+	 * Tests the hasTag method
+	 * 
+	 * @exception Exception if an exception occurred
+	 */
 	public void testHasTag() throws Exception {
 		ID3v2 id3v2 = new ID3v2((File) testFiles.get("short_none"));
 		assertFalse(id3v2.hasTag());
@@ -174,12 +186,22 @@ public class ID3v2Test extends MP3TestCase {
 		assertTrue(id3v2.hasTag());
 	}
 
+	/**
+	 * Tests the getFrames method.
+	 * 
+	 * @exception Exception if an exception occurred
+	 */
 	public void testGetFrames() throws Exception {
 		ID3v2 id3v2 = new ID3v2((File) testFiles.get("short_v2reg"));
 		Vector res = id3v2.getFrames();
 		assertEquals(expectFramesSet, res);
 	}
 
+	/**
+	 * Tests the getFrame method.
+	 * 
+	 * @exception Exception if an exception occurred
+	 */
 	public void testGetFrame() throws Exception {
 		ID3v2 id3v2 = new ID3v2((File) testFiles.get("short_v2reg"));
 
@@ -219,6 +241,11 @@ public class ID3v2Test extends MP3TestCase {
 		assertEquals(expect, res);
 	}
 
+	/**
+	 * Tests the addFrame method.
+	 * 
+	 * @exception Exception if an exception occurred
+	 */
 	public void testAddFrame() throws Exception {
 		ID3v2 id3v2 = new ID3v2((File) testFiles.get("short_none"));
 		ID3v2Frame add = (ID3v2Frame) expectFrames.get("TPE1");
@@ -305,8 +332,10 @@ public class ID3v2Test extends MP3TestCase {
 		}
 	}
 
-	/*
-	 * Class under test for void removeFrame(String, int)
+	/**
+	 * Tests the removeFrame method.
+	 * 
+	 * @exception Exception if an exception occurred
 	 */
 	public void testRemoveFrameStringint() throws Exception {
 		ID3v2 id3v2 = new ID3v2((File) testFiles.get("short_v2reg"));
@@ -319,6 +348,11 @@ public class ID3v2Test extends MP3TestCase {
 		}
 	}
 
+	/**
+	 * Tests the removeFrames method.
+	 * 
+	 * @exception Exception if an exception occurred
+	 */
 	public void testRemoveFrames() throws Exception {
 		ID3v2 id3v2 = new ID3v2((File) testFiles.get("short_v2reg"));
 		id3v2.removeFrames();
@@ -328,6 +362,11 @@ public class ID3v2Test extends MP3TestCase {
 		assertEquals(expect, res);
 	}
 
+	/**
+	 * Tests updating the ID3v2 tag in a file which does not have a tag.
+	 * 
+	 * @exception Exception if an exception occurred
+	 */
 	public void testUpdateNone() throws Exception {
 		// Add frames to a file without any tags
 		// Don't use any options (compression, padding, unsynch)
@@ -345,6 +384,12 @@ public class ID3v2Test extends MP3TestCase {
 		assertEquals(expectFramesSet, res);
 	}
 
+	/**
+	 * Tests updating the ID3v2 tag in a file which does not have a tag, using
+	 * padding.
+	 * 
+	 * @exception Exception if an exception occurred
+	 */
 	public void testUpdateNonePadding() throws Exception {
 		// Add frames to a file without any tags
 		// Use padding, but no other options
@@ -366,6 +411,12 @@ public class ID3v2Test extends MP3TestCase {
 				.length() > 2048);
 	}
 
+	/**
+	 * Tests updating the ID3v2 tag in a file with an existing tag, using
+	 * padding.
+	 * 
+	 * @exception Exception if an exception occurred
+	 */
 	public void testUpdateExPadding() throws Exception {
 		// Add frames to a file with tags
 		// Use padding, but no other options
@@ -463,10 +514,10 @@ public class ID3v2Test extends MP3TestCase {
 
 		assertTrue(((File) testFiles.get("short_none")).length() == 902L);
 	}
-	
+
 	/**
-	 * Tests that if the constructor is called with an InputStream,
-	 * this stream is not closed.
+	 * Tests that if the constructor is called with an InputStream, this stream
+	 * is not closed.
 	 * 
 	 * @throws Exception if an exception occurred
 	 */
@@ -476,7 +527,8 @@ public class ID3v2Test extends MP3TestCase {
 		FileInputStream stream = new FileInputStream(file);
 		new ID3v2(stream);
 		try {
-			stream.read(); // this will throw an exception if the stream is closed
+			stream.read(); // this will throw an exception if the stream is
+							// closed
 		} catch (IOException e) {
 			fail("Stream is unexpectedly closed");
 		}
@@ -487,16 +539,17 @@ public class ID3v2Test extends MP3TestCase {
 		stream = new FileInputStream(file);
 		new ID3v2(stream);
 		try {
-			stream.read(); // this will throw an exception if the stream is closed
+			stream.read(); // this will throw an exception if the stream is
+							// closed
 		} catch (IOException e) {
 			fail("Stream is unexpectedly closed");
 		}
 		stream.close();
 	}
-	
+
 	/**
-	 * Tests that if the constructor is called with a File,
-	 * the internal input stream is closed.
+	 * Tests that if the constructor is called with a File, the internal input
+	 * stream is closed.
 	 * 
 	 * @throws Exception if an exception occurred
 	 */
