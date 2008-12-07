@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="java_mp3.makejar" default="makejar" basedir=".">
+	
+	<property name="java_mp3.version" value="0.4"/>
+
+	<target name="javadoc">
+        <javadoc access="public" author="true" classpath="C:\Program Files (x86)\eclipse\plugins\org.junit_3.8.2.v20080602-1318\junit.jar" destdir="doc" nodeprecated="false" nodeprecatedlist="false" noindex="false" nonavbar="false" notree="false" packagenames="de.vdheide.utils" source="1.3" sourcefiles="src/de/vdheide/mp3/ID3IllegalFormatException.java,src/de/vdheide/mp3/ParseException.java,src/de/vdheide/mp3/ID3v2IllegalVersionException.java,src/de/vdheide/mp3/ID3v2Header.java,src/de/vdheide/mp3/NoMP3FrameException.java,src/de/vdheide/mp3/NoID3TagException.java,src/de/vdheide/mp3/Parser.java,src/de/vdheide/mp3/NoID3v2HeaderException.java,src/de/vdheide/mp3/TagContent.java,src/de/vdheide/mp3/ID3v2DecompressionException.java,src/de/vdheide/mp3/TagFormatException.java,src/de/vdheide/mp3/ID3v2Frame.java,src/de/vdheide/mp3/MP3File.java,src/de/vdheide/mp3/ID3v2ExtendedHeader.java,src/de/vdheide/mp3/ID3v2.java,src/de/vdheide/mp3/Frame.java,src/de/vdheide/mp3/ID3v2WrongCRCException.java,src/de/vdheide/mp3/FrameDamagedException.java,src/de/vdheide/mp3/ID3v2NoSuchFrameException.java,src/de/vdheide/mp3/ID3v2Exception.java,src/de/vdheide/mp3/TextFrame.java,src/de/vdheide/mp3/TextFrameEncoding.java,src/de/vdheide/mp3/MP3Properties.java,src/de/vdheide/mp3/ID3Exception.java,src/de/vdheide/mp3/BinaryFrame.java,src/de/vdheide/mp3/ByteBuilder.java,src/de/vdheide/mp3/TextFrameNoEncoding.java,src/de/vdheide/mp3/NoID3v2TagException.java,src/de/vdheide/mp3/ID3.java" sourcepath="src;test" splitindex="true" use="true" version="true">
+            <link href="file:/D:/data/privat/eclipse/id3/doc/"/>
+        </javadoc>
+    </target>
+   
+	<target name="makejar" description="Create a jar for the java_mp3 project">
+		<jar jarfile="bin/java_mp3.jar" includes="**/*.class" basedir="bin/"/>
+	</target>
+
+	<target name="bin" description="Create the ZIP containing the precompiled library">
+		<zip destfile="bin/java_mp3-${java_mp3.version}-bin.zip">
+			<fileset dir="bin" includes="java_mp3.jar"/>
+			<fileset dir="." includes="Changelog README"/>
+		</zip>
+	</target>
+	
+	<target name="src" description="Create the ZIP containing the sources and documentation">
+		<zip destfile="bin/java_mp3-${java_mp3.version}-src.zip">
+			<fileset dir="." includes="src/ test/ doc/"/>
+			<fileset dir="." includes="Changelog README"/>
+		</zip>
+	</target>
+		
+</project>

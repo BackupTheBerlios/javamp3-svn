@@ -1,0 +1,37 @@
+Version 0.4
+
+FIX: Changed Eclipse project settings to use the JUnit library instead of JUNIT_HOME
+MOD: Various internal modifications (removing of unused private members, imports etc.)
+MOD: Added serialVersionUID to all exception classes
+MOD: MP3TestCase: delete mp3 files created in setUp in tearDown
+FIX: Parser.parseText(int) destroyed last char in a little-endian UTF-16 string
+FIX: ID3v2: an InputStream that was passed to the constructor was closed. Only close
+     an "internal" InputStream created when a File is passed to the constructor.
+
+Version 0.3
+
+FIX: When updating an ID3v2 tag in an MP3 file which already contained an ID3v2
+     header with enough space for the new tag, the file was corrupted.
+FIX: A file handle was not closed if a file did not contain any ID3v2 tag.
+FIX: If a temporary file was used for writing the ID3v2 tag, the temporary file
+     was unnecessarily copied to the original file instead of moving it.
+MOD: Massive speedup of ID3v2.update() if a temporary file is used.
+FIX: Packaging error: The previous bin archive contained single class files
+     instead of a jar file.
+
+Version 0.2
+
+MOD: Renamed package pri.nightmare.utils to de.vdheide.utils
+MOD: Reformatted source code (using the Eclipse format tool)
+FIX: Added a lot of missing close() calls [many reporters]
+FIX: MP3File.setTrack() called id3.setGenre() instead of id3.setTrack() [nils]
+MOD: Removed unnecessary imports [henc]
+FIX: IndexOutOfBoundException in ID3v2.unsynchronize() if last byte of ID3v2 header was 0xff [nils]
+FIX: Only read track from v1 tag if byte to the left of it is 0
+MOD: Small change in the logic of ID3v2.synchronize() to make the code more readable
+FIX: ID3v2.update() sometimes failed to update the file if a temporary file had to be used
+FIX: When adding ID3v2 frames to a small file, no padding was used even if requested
+MOD: Refactored MP3File constructors by moving common code into a separate method
+FIX: MP3File.setInternetStationName() wrote to frame ID "TRSO" instead of "TRSN"
+ADD: Test cases (JUnit). Still more to come!
+FIX: Some JavaDoc problems
