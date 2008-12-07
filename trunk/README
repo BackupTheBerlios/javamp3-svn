@@ -1,29 +1,19 @@
-This is version 0.3 of the de.vdheide.mp3 package, a library to read and write 
+This is version 0.4 of the de.vdheide.mp3 package, a library to read and write 
 ID3 and ID3v2 tags and read MP3 file properties.
 
 This release consists of three files:
 
-java_mp3-0.3-bin.zip
+java_mp3-0.4-bin.zip
 	Contains the precompiled library in a jar file.
-java_mp3-0.3-src.zip
-	Contains the source code for the library and the test cases.
-java_mp3-0.3-doc.zip
-	Contains the JavaDoc documentation for the library.
-	
+java_mp3-0.4-src.zip
+	Contains the source code for the library, the test cases
+	and the JavaDoc documentation.
 	
 
 Release notes
 =============
 
-This is version 0.3. Since this is only the third release, I still consider it 
-alpha. But I will not change any existing public methods and classes, so the
-interface stays the same even if I do some modifications to the code.
-
-A severe bug was discovered in version 0.2 which could lead to corruption of
-MP3 files when updating the ID3v2 tags. All users are advised to update to 
-version 0.3.
-I also used to opportunity to optimize the file copy operations. Updates to
-ID3v2 tags run much faster now.
+This is version 0.4.
 
 This is a pure bugfix release (see the Changelog for details), it contains no 
 new features.
@@ -31,6 +21,10 @@ new features.
 Documentation is only present as JavaDoc created class descriptions. I will add
 some examples and overview documentation later. For now, also take a look at the
 test cases contained in the source archive.
+
+I have moved the project over to BerliOS. The new project site is now
+http://developer.berlios.de/projects/javamp3/. This includes a Subversion repository,
+a bug tracker and mailing lists.
 
 
 Future plans
@@ -43,18 +37,6 @@ Since I am not using the library myself (I dropped all plans on developing an
 ID3 tagger), I depend on you to provide me with ideas for the further direction
 of development. Patches and code is definitely preferred, but feature requests
 and bug reports are welcome to.
-
-I also plan on making the source code available in a public code repository
-and add a mailing list for announcements and discussion.
-If anyone can recommend a reliable public Subversion repository, please feel
-free to contact me. Subversion only please, I do not plan to go back to CVS.
-
-
-Next version
-------------
-
-The next version will be a bugfix version again. I plan on completing the test
-cases and improve documentation. This version is due at the beginning of 2005.
 
 
 Future versions

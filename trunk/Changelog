@@ -1,4 +1,4 @@
-Version 0.4 (working)
+Version 0.4
 
 FIX: Changed Eclipse project settings to use the JUnit library instead of JUNIT_HOME
 MOD: Various internal modifications (removing of unused private members, imports etc.)
