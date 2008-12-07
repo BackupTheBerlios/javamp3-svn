@@ -3,6 +3,7 @@ package de.vdheide.mp3;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Vector;
@@ -86,7 +87,8 @@ public class ID3v2Test extends MP3TestCase {
 		FileInputStream fis = new FileInputStream((File) testFiles
 				.get("short_v2reg"));
 		ID3v2 id3v2 = new ID3v2(fis);
-
+		fis.close();
+		
 		// try to read a frame => should succeed
 		Vector res = id3v2.getFrame("TIT2");
 		Vector expect = new Vector();
@@ -460,6 +462,63 @@ public class ID3v2Test extends MP3TestCase {
 		assertTrue((byte) 0 == b[1]);
 
 		assertTrue(((File) testFiles.get("short_none")).length() == 902L);
+	}
+	
+	/**
+	 * Tests that if the constructor is called with an InputStream,
+	 * this stream is not closed.
+	 * 
+	 * @throws Exception if an exception occurred
+	 */
+	public void testConstuctorInputStreamNotClosed() throws Exception {
+		// test for a file with no id3v2 header
+		File file = (File) testFiles.get("short_none");
+		FileInputStream stream = new FileInputStream(file);
+		new ID3v2(stream);
+		try {
+			stream.read(); // this will throw an exception if the stream is closed
+		} catch (IOException e) {
+			fail("Stream is unexpectedly closed");
+		}
+		stream.close();
+
+		// test for a file with an id3v2 header
+		file = (File) testFiles.get("short_v2reg");
+		stream = new FileInputStream(file);
+		new ID3v2(stream);
+		try {
+			stream.read(); // this will throw an exception if the stream is closed
+		} catch (IOException e) {
+			fail("Stream is unexpectedly closed");
+		}
+		stream.close();
+	}
+	
+	/**
+	 * Tests that if the constructor is called with a File,
+	 * the internal input stream is closed.
+	 * 
+	 * @throws Exception if an exception occurred
+	 */
+	public void testConstuctorFileClosed() throws Exception {
+		// test for a file with no id3v2 header
+		File file = (File) testFiles.get("short_none");
+		new ID3v2(file);
+
+		// if the internal InputStream is still open, the file cannot be deleted
+		// (This is a bad test as it depends on the operating system, but
+		// I don't see any other way.)
+		if (false == file.delete()) {
+			fail("Could not delete file as expected");
+		}
+
+		// test for a file with an id3v2 header
+		file = (File) testFiles.get("short_v2reg");
+		new ID3v2(file);
+		// if the internal InputStream is still open, the file cannot be deleted
+		if (false == file.delete()) {
+			fail("Could not delete file as expected");
+		}
 	}
 
 }

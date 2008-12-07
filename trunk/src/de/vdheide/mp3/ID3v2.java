@@ -73,30 +73,7 @@ public class ID3v2 {
 			ID3v2IllegalVersionException, ID3v2WrongCRCException,
 			ID3v2DecompressionException {
 		this.file = null;
-
-		// open file and read tag (if present)
-		try {
-			readHeader(in);
-		} catch (NoID3v2HeaderException e) {
-			// no tag
-			header = null;
-			extended_header = null;
-			frames = null;
-			in.close();
-			return;
-		}
-
-		// tag present
-		if (header.hasExtendedHeader()) {
-			readExtendedHeader(in);
-		} else {
-			extended_header = null;
-		}
-
-		readFrames(in);
-
-		in.close();
-		is_changed = false;
+		init(in, false);
 	}
 
 	/**
@@ -114,8 +91,9 @@ public class ID3v2 {
 	 */
 	public ID3v2(File file) throws IOException, ID3v2IllegalVersionException,
 			ID3v2WrongCRCException, ID3v2DecompressionException {
-		this(new FileInputStream(file));
 		this.file = file;
+		FileInputStream is = new FileInputStream(file);
+		init(is, true);
 	}
 
 	/** ******** Public variables ********* */
@@ -521,7 +499,7 @@ public class ID3v2 {
 
 			// if more space is needed than provided or no padding should be
 			// used and
-			// lengths do not mach exactly, create a temporary file
+			// lengths do not match exactly, create a temporary file
 			File write_to = file;
 			if (header == null
 					|| (header != null && new_length > length_file || (use_padding == false && new_length != length_file))) {
@@ -637,6 +615,55 @@ public class ID3v2 {
 	private boolean use_unsynchronization = true;
 
 	/** ******** Private methods ********* */
+
+	/**
+	 * Initializes a new object.
+	 * 
+	 * This method is called by the constructor to initialize the object by
+	 * reading the ID3v2 data from the given InputStream.
+	 * 
+	 * @param in Input stream to read from. Stream position must be set to
+	 *            beginning of file (i.e. position of ID3v2 tag).
+	 * @exception IOException If I/O errors occur
+	 * @exception ID3v2IllegalVersionException If file contains an IDv2 tag of
+	 *                higher version than <code>VERSION</code>.
+	 *                <code>REVISION</code>
+	 * @exception ID3v2WrongCRCException If file contains CRC and this differs
+	 *                from CRC calculated from the frames
+	 * @exception ID3v2DecompressionException If a decompression error occurred
+	 *                while decompressing a compressed frame
+	 */
+	private void init(InputStream in, boolean closeStream) throws IOException,
+			ID3v2IllegalVersionException, ID3v2WrongCRCException,
+			ID3v2DecompressionException {
+		// open file and read tag (if present)
+		try {
+			readHeader(in);
+		} catch (NoID3v2HeaderException e) {
+			// no tag
+			header = null;
+			extended_header = null;
+			frames = null;
+			if (closeStream) {
+				in.close();
+			}
+			return;
+		}
+
+		// tag present
+		if (header.hasExtendedHeader()) {
+			readExtendedHeader(in);
+		} else {
+			extended_header = null;
+		}
+
+		readFrames(in);
+		is_changed = false;
+
+		if (closeStream) {
+			in.close();
+		}
+	}
 
 	/**
 	 * Read ID3v2 header from file <code>in</code>

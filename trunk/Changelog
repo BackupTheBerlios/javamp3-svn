@@ -5,6 +5,8 @@ MOD: Various internal modifications (removing of unused private members, imports
 MOD: Added serialVersionUID to all exception classes
 MOD: MP3TestCase: delete mp3 files created in setUp in tearDown
 FIX: Parser.parseText(int) destroyed last char in a little-endian UTF-16 string
+FIX: ID3v2: an InputStream that was passed to the constructor was closed. Only close
+     an "internal" InputStream created when a File is passed to the constructor.
 
 Version 0.3
 
