@@ -33,7 +33,8 @@ import java.util.Enumeration;
 import java.util.Vector;
 
 /**
- * Instances of this class contain an ID3v2 tag
+ * Instances of this class contain an ID3v2 tag.
+ * 
  * <p>
  * Notes:
  * <ol>
