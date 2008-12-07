@@ -413,7 +413,6 @@ public class MP3FileTest extends MP3TestCase {
                 .getAbsolutePath());
 
         byte[] bin = { (byte) 7, (byte) 10, (byte) 99 };
-        byte[] empty = {};
 
         TagContent content = new TagContent();
         content.setContent("Artist");
